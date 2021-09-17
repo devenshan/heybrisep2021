@@ -1,0 +1,5 @@
+parameter_defaults:
+  TimeZone: 'Australia/Melbourne'
+  RabbitFDLimit: 65536
+  NeutronTunnelTypes: 'vxlan'
+  NeutronNetworkType: 'vxlan'
