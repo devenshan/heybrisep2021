@@ -1,0 +1,19 @@
+$ cat containers-prepare-parameter.yaml
+#
+#   openstack tripleo container image prepare default --local-push-destination --output-env-file containers-prepare-parameter.yaml
+#
+
+parameter_defaults:
+  ContainerImagePrepare:
+  - push_destination: true
+    excludes:
+      - ceph
+      - prometheus
+    set:
+      name_prefix: osp16_1_containers-
+      name_suffix: ''
+      namespace: satellite.abc.example.net:5000
+      neutron_driver: null
+      rhel_containers: false
+      tag: '16.1.3'
+    tag_from_label: '{version}-{release}'
