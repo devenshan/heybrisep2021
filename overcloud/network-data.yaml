@@ -1,0 +1,44 @@
+- name: InternalApi
+  name_lower: internal_api
+  vip: true
+  vlan: 11
+  ip_subnet: '172.xx.yy.0/23'
+  allocation_pools: [{'start': '172.xx.yy.11', 'end': '172.xx.yy.250'}]
+- name: Storage
+  vip: true
+  vlan: 12
+  name_lower: storage
+  ip_subnet: '172.xx.dd.0/23'
+  allocation_pools: [{'start': '172.xx.dd.100', 'end': '172.xx.dd.250'}]
+
+- name: StorageMgmt
+  name_lower: storage_mgmt
+  vip: true
+  vlan: 13
+  ip_subnet: '172.xx.ee.0/23'
+  allocation_pools: [{'start': '172.xx.ee.100', 'end': '172.xx.ee.250'}]
+
+- name: Tenant
+  vip: false  # Tenant network does not use VIPs
+  name_lower: tenant
+  vlan: 14
+  ip_subnet: '172.xx.nn.0/23'
+  allocation_pools: [{'start': '172.xx.nn.11', 'end': '172.xx.nn.250'}]
+
+- name: External
+  vip: true
+  name_lower: external
+  vlan: 21 
+  ip_subnet: '10.41.150.0/23'
+  allocation_pools: [{'start': '10.41.151.215', 'end': '10.41.151.225'}]
+  gateway_ip: '10.41.150.1'
+
+- name: Management
+  # Management network is enabled by default for backwards-compatibility, but
+  # is not included in any roles by default. Add to role definitions to use.
+  enabled: false
+  vip: false  # Management network does not use VIPs
+  name_lower: management
+  vlan: 2004
+  ip_subnet: '192.168.4.0/24'
+  allocation_pools: [{'start': '192.168.4.10', 'end': '192.168.4.250'}]

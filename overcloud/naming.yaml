@@ -1,0 +1,28 @@
+parameter_defaults:
+
+  ControllerSchedulerHints:
+    'capabilities:node': 'controller-%index%'
+
+  NovaComputeSchedulerHints:
+    'capabilities:node': 'compute-%index%'
+
+  ComputeDpdkSchedulerHints:
+    'capabilities:node': 'computedpdk-%index%'
+  
+  ComputeSriovSchedulerHints:
+    'capabilities:node': 'computesriov-%index%'
+  
+  HostnameMap:
+    # CONTROLLERS
+    controller-0: 
+    controller-1: 
+    controller-2: 
+
+    # COMPUTES DPDK
+    computedpdk-0: 
+    computedpdk-1: 
+    computedpdk-2: 
+
+    # COMPUTES DPDK Non-HyperThreaded
+    computedpdknonht-0: 
+    computedpdknonht-1: 

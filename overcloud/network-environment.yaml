@@ -1,0 +1,78 @@
+#This file is an example of an environment file for defining the isolated
+#networks and related parameters.
+resource_registry:
+  # Network Interface templates to use (these files must exist). You can
+  # override these by including one of the net-*.yaml environment files,
+  # such as net-bond-with-vlans.yaml, or modifying the list here.
+  # Port assignments for the Controller
+  OS::TripleO::Controller::Net::SoftwareConfig: ./nic-configs/controller.yaml
+  OS::TripleO::Compute::Net::SoftwareConfig: ./nic-configs/compute.yaml
+  OS::TripleO::ComputeDpdk::Net::SoftwareConfig: ./nic-configs/computedpdkht.yaml
+
+  OS::TripleO::Network::Ports::ExternalVipPort: /home/stack/overcloud/templates/network/ports/external.yaml
+  OS::TripleO::Network::Ports::InternalApiVipPort: /home/stack/overcloud/templates/network/ports/internal_api.yaml
+  OS::TripleO::Network::Ports::StorageVipPort: /home/stack/overcloud/templates/network/ports/storage.yaml
+  OS::TripleO::Network::Ports::StorageMgmtVipPort: /home/stack/overcloud/templates/network/ports/storage_mgmt.yaml
+  OS::TripleO::Network::Ports::RedisVipPort: /home/stack/overcloud/templates/network/ports/vip.yaml
+
+
+parameter_defaults:
+  #
+  DockerNetworkOptions: '--bip=172.17.0.1/24'
+  ControlPlaneSubnetCidr: '23'
+  #
+  # Gateway router for the provisioning network (or Undercloud IP)
+  # Gateway routers for routable networks
+  #
+  ControlPlaneDefaultRoute: 172.xx.yy.1
+  ExternalInterfaceDefaultRoute: '10.41.150.1'
+  # Generally the IP of the Undercloud
+  EC2MetadataIp: 172.ff.gg.1
+  #
+  # Customize the IP subnets to match the local environment
+  #
+  StorageNetCidr: ''
+  StorageMgmtNetCidr: ''
+  InternalApiNetCidr: ''
+  TenantNetCidr: ''
+  ExternalNetCidr: ''
+  #
+  # Customize the VLAN IDs to match the local environment
+  #
+  InternalApiNetworkVlanID: 11
+  StorageNetworkVlanID: 12
+  StorageMgmtNetworkVlanID: 13
+  TenantNetworkVlanID: 14
+  ExternalNetworkVlanID: 21
+  #
+ 
+  # Define the DNS servers (maximum 2) for the overcloud nodes
+  #
+  #DnsServers: ["10.70.144.104","10.70.144.105"]
+  DnsServers: ["10.173.19.18","10.173.19.2"]
+
+  #
+  # BOND OPTIONS
+  BondInterfaceOvsOptions: "mode=4 lacp_rate=1 updelay=1000 downdelay=1000 miimon=100 xmit_hash_policy=layer3+4"
+
+  NtpServer: ["10.70.144.104","10.70.144.105"]
+  NetworkDeploymentActions: ['CREATE']
+
+  # Predictable VIPs
+  ControlFixedIPs: [{'ip_address':''}]
+  PublicVirtualFixedIPs: [{'ip_address':''}]
+  InternalApiVirtualFixedIPs: [{'ip_address':''}]
+  StorageVirtualFixedIPs: [{'ip_address':''}]
+  StorageMgmtVirtualFixedIPs: [{'ip_address':''}]
+  RedisVirtualFixedIPs: [{'ip_address':''}]
+
+
+  # Set to empty string to enable multiple external networks or VLANs on datacetre/br-ex else it will be L3 only
+  NeutronExternalNetworkBridge: "''"
+  NeutronEnableIsolatedMetadata: True
+  # The tunnel type for the tenant network (vxlan or gre). Set to '' to disable tunneling.
+  NeutronMechanismDrivers: "openvswitch"
+  # Neutron Physical interface MTU
+  NeutronGlobalPhysnetMtu: 9096
+  # tenant network mtu - at least 50 bytes smaller than the MTU on the physical network
+  NeutronTenantMtu: 9000

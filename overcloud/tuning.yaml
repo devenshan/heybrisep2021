@@ -1,0 +1,25 @@
+parameter_defaults:
+  #
+  ManageFirewall: true
+
+
+  NovaSchedulerAvailableFilters:
+    - nova.scheduler.filters.all_filters
+    - nova.scheduler.filters.numa_topology_filter.NUMATopologyFilter
+    - nova.scheduler.filters.aggregate_instance_extra_specs.AggregateInstanceExtraSpecsFilter
+    - nova.scheduler.filters.pci_passthrough_filter.PciPassthroughFilter
+    # https://bugs.launchpad.net/nova/+bug/1658078
+
+  NovaSchedulerDefaultFilters:
+    - RetryFilter
+    - AggregateInstanceExtraSpecsFilter
+    - AvailabilityZoneFilter
+    - ServerGroupAntiAffinityFilter
+    - ServerGroupAffinityFilter
+    - RamFilter
+    - DiskFilter
+    - ComputeFilter
+    - ComputeCapabilitiesFilter
+    - ImagePropertiesFilter
+    - NUMATopologyFilter
+    - PciPassthroughFilter

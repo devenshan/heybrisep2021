@@ -1,0 +1,6 @@
+parameter_defaults:
+
+  ControllerCount: 3
+  ComputeCount: 1
+  ComputeDpdkCount: 3
+  ComputeSriovCount: 2

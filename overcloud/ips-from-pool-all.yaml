@@ -1,0 +1,21 @@
+# Environment file demonstrating how to pre-assign IPs to all node types
+resource_registry:
+  OS::TripleO::Controller::Ports::ExternalPort: /home/stack/overcloud/templates/network/ports/external_from_pool.yaml
+  OS::TripleO::Compute::Ports::ExternalPort: /home/stack/overcloud/templates/network/ports/external_from_pool.yaml
+  OS::TripleO::ComputeDpdk::Ports::ExternalPort: /home/stack/overcloud/templates/network/ports/external_from_pool.yaml
+
+parameter_defaults:
+  ControllerIPs:
+    external:
+    - 10.41.150.21
+    - 10.41.150.22
+    - 10.41.150.23
+  ComputeDpdkIPs:
+    external:
+    - 10.41.150.105
+    - 10.41.150.106
+  ComputeDpdkNonHtIPs:
+    external:
+    - 10.41.150.78
+    - 10.41.150.79
+
